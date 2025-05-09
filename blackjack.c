@@ -17,3 +17,25 @@ void play_game() {
         }
     }
 }
+
+void play_round() {
+    Hand player_hand, dealer_hand;
+    //game logic here
+    
+}
+
+int blackjack (Hand *hand){
+    //handle blackjack
+}
+
+int bust (Hand *hand){
+    //handle bust
+}
+
+int compare(Hand *hand){
+    //handle dealer/player comparison and return accordingly
+}
+
+void log(const char *result, int bet, int net_change){
+    //handle write out of w/l
+}
