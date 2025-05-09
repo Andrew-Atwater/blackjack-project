@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <player.h>
+#include "player.h"
 
 void init_hand(Hand *hand){
     hand->cards = malloc(sizeof(int) * capacity); //dynamically allocates space for more cards in the hand array using realloc later
