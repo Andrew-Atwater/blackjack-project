@@ -30,6 +30,16 @@ void play_round() {
     deal_card(&dealer_hand, draw(&deck));
     deal_card(&player_hand, draw(&deck));
     deal_card(&dealer_hand, draw(&deck));
+
+    print_hand("Player", &player_hand);
+    if(dealer_hand.value == 21){
+        print_hand("Dealer", &dealer_hand);
+        printf("Dealer has blackjack! Dealer wins\n");
+        return;
+    } else {
+        printf("Dealer's Hand: [%d] [??]\n", dealer_hand.cards[0]);
+    }
+
 }
 
 int blackjack (Hand *hand){
