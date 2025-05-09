@@ -1,0 +1,34 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "deck.h"
+
+void init_deck(Deck *deck){
+    deck->size = 52;
+    deck->index = 0;
+    deck->cards = malloc(sizeof(int) * deck->size);
+
+    int position = 0;
+
+    //adding nums 2-9 to deck: 4 each = 32 cards
+    for(int value = 2; value <= 9; value++){
+        for(int i = 0; i < 4; i++){
+            deck->cards[position] = value;
+            position++;
+        }
+    }
+
+    //adding all cards valued 10: 4 10's plus 4 each of jack, queen, and king = 16 cards
+    for(int i = 0; i < 16; i++){
+        deck->cards[position] = 10;
+        position++;
+    }
+
+    //adding aces valued 11: 4 total 32 + 16 + 4 = 52 hooray
+    for(int i = 0; i < 4; i++){
+        deck->cards[position] = 11;
+        position++;
+    }
+
+    shuffle(deck);
+}
