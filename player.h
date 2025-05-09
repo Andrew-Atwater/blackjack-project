@@ -10,7 +10,7 @@ typedef struct{
 
 void init_hand(Hand *hand);
 void free_hand(Hand *hand);
-void print_hand(Hand *hand);
+void print_hand(const char *label, Hand *hand);
 void update_value(Hand *hand);
 
 #endif
