@@ -5,7 +5,7 @@
 #include "player.h"
 #include "deck.h"
 
-/*void play_game() {
+void play_game() {
     int playing = 1;
     while playing(){
         play_round();
@@ -19,9 +19,17 @@
 }
 
 void play_round() {
+    Deck deck;
     Hand player_hand, dealer_hand;
-    //game logic here
-    
+
+    init_deck(&deck);
+    init_hand(&player_hand);
+    init_hand(&dealer_hand);
+
+    deal_card(&player_hand, draw(&deck));
+    deal_card(&dealer_hand, draw(&deck));
+    deal_card(&player_hand, draw(&deck));
+    deal_card(&dealer_hand, draw(&deck));
 }
 
 int blackjack (Hand *hand){
@@ -36,8 +44,8 @@ int compare(Hand *hand){
     //handle dealer/player comparison and return accordingly
 }
 
-//void log(const char *result, int bet, int net_change){
+void log(const char *result, int bet, int net_change){
     //handle write out of w/l
     FILE *log = fopen("session-log.txt", "a");
     fclose(log);
-} */
+}

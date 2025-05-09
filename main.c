@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "deck.h"
 #include "player.h"
 #include "blackjack.h"
@@ -7,6 +8,8 @@
 int main(){
     Deck deck;
     Hand player_hand;
+
+    srand(time(NULL));
 
     init_deck(&deck);
     init_hand(&player_hand);
