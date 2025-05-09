@@ -32,3 +32,26 @@ void init_deck(Deck *deck){
 
     shuffle(deck);
 }
+
+void shuffle(Deck *deck){ //uses fisher-yates algorithm (thank you stackoverflow)
+    int i, j, temp;
+    for(i = deck->size - 1; i > 0; i--){
+        j = rand() % (i + 1);
+        temp = deck->cards[j];
+        deck->cards[j] = temp;
+    }
+}
+
+int draw(Deck *deck){
+    return deck->cards[deck->index];
+    index++;
+}
+
+void free_deck(Deck *deck){
+    if(deck->cards != NULL){
+        free(deck->cards);
+        deck->cards = NULL;
+    }
+    deck->size = 0;
+    deck->index = 0;
+}
