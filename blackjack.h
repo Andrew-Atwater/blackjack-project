@@ -11,6 +11,6 @@ int blackjack(Hand *hand);
 int bust(Hand *hand);
 int compare(Hand *player, Hand *dealer);
 
-void log(const char *result, int bet, int net_change);
+//void log(const char *result, int bet, int net_change);
 
 #endif

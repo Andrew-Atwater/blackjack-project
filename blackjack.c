@@ -36,7 +36,7 @@ int compare(Hand *hand){
     //handle dealer/player comparison and return accordingly
 }
 
-void log(const char *result, int bet, int net_change){
+//void log(const char *result, int bet, int net_change){
     //handle write out of w/l
     FILE *log = fopen("session-log.txt", "a");
     fclose(log);
