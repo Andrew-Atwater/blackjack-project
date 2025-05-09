@@ -2,10 +2,15 @@
 #define PLAYER_H
 
 typedef struct{
-    Card *cards;
+    int *cards;
     int num_cards;
     int value;
-    int has_aces;
+    int num_aces;
 } Hand;
+
+void init_hand(Hand *hand);
+void free_hand(Hand *hand);
+void print_hand(Hand *hand);
+void update_value(Hand *hand);
 
 #endif
