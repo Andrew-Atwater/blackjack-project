@@ -5,7 +5,7 @@
 #include "player.h"
 #include "deck.h"
 
-void play_game() {
+/*void play_game() {
     int playing = 1;
     while playing(){
         play_round();
@@ -40,4 +40,4 @@ int compare(Hand *hand){
     //handle write out of w/l
     FILE *log = fopen("session-log.txt", "a");
     fclose(log);
-}
+} */

@@ -44,7 +44,7 @@ void shuffle(Deck *deck){ //uses fisher-yates algorithm (thank you stackoverflow
 
 int draw(Deck *deck){
     return deck->cards[deck->index];
-    index++;
+    deck->index++;
 }
 
 void free_deck(Deck *deck){
