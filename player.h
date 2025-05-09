@@ -6,11 +6,13 @@ typedef struct{
     int num_cards;
     int value;
     int num_aces;
+    int capacity;
 } Hand;
 
 void init_hand(Hand *hand);
 void free_hand(Hand *hand);
 void print_hand(const char *label, Hand *hand);
 void update_value(Hand *hand);
+void deal_hand(Hand *hand, int card_value);
 
 #endif

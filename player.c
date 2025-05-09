@@ -3,7 +3,7 @@
 #include <player.h>
 
 void init_hand(Hand *hand){
-    hand->cards = malloc(sizeof(int) * 12) //maximum hand size
+    hand->cards = malloc(sizeof(int) * capacity); //dynamically allocates space for more cards in the hand array using realloc later
     hand->num_cards = 0;
     hand->value = 0;
     hand->num_aces = 0;
@@ -17,6 +17,7 @@ void free_hand(Hand *hand){
     hand->num_cards = 0;
     hand->value = 0;
     hand->num_aces = 0;
+    hand->capacity = 2;
 }
 
 void print_hand(const char *label, Hand *hand){
@@ -45,5 +46,17 @@ void update_value(Hand *hand){
             hand->value -= 10;
         }
     }
-    
+
+}
+
+void deal_card(Hand *hand, int card_value){
+    if(hand->num_cards >= hand->capacity){
+        int new_cap = hand->capacity * 2;
+        int *temp = realloc(hand->cards, sizeof(int) * new_cap);
+
+        hand->cards = temp
+        hand->capacity = new_cap;
+    }
+    hand->cards[hand->num_cards + 1] = card_value;
+    update_value(hand);
 }
