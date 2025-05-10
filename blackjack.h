@@ -5,8 +5,8 @@
 #include "player.h"
 
 void play_game();
-void play_round();
+int play_round();
 
-//void log(const char *result, int bet, int net_change);
+//void log(char result);
 
 #endif

@@ -7,14 +7,34 @@
 
 void play_game() {
     char choice = 'y';
-    while(choice == 'y' || choice == 'Y'){
-        play_round();
+    int bal = 100;
+    int bet;
+    while((choice == 'y' || choice == 'Y') && bal > 0){
+        printf("What would you like your bet to be for this round? Balance: %d\n", bal);
+        scanf(" %d", &bet);
+        if(bet > bal || bet <= 0) {
+            printf("Invalid bet, make sure your bet is less than your balance.\n");
+        } else {
+            int result = play_round();
+            if(result == 1){
+                bal += bet;
+            } else if(result == -1){
+                bal -= bet;
+            }
+            //log(result);
+            if (bal == 0){
+                printf("Account empty! Game over. Thanks for playing!\n");
+                break;
+            }
+        }
         printf("Play another round? (y/n): ");
         scanf(" %c", &choice);
     }
+    printf("Thanks for playing Blackjack!\n");
 }
 
-void play_round() {
+int play_round() {
+    int result = 0; //win = 1, loss = -1, push = 0
     Deck deck;
     Hand player_hand, dealer_hand;
 
@@ -34,7 +54,8 @@ void play_round() {
         free_hand(&dealer_hand);
         free_hand(&player_hand);
         free_deck(&deck);
-        return;
+        result = -1;
+        return result;
     } else {
         printf("Dealer's Hand: [%d] [??]\n", dealer_hand.cards[0]);
     }
@@ -53,6 +74,7 @@ void play_round() {
 
             if(player_hand.value > 21){
                 printf("Player busts!\n");
+                result = -1;
                 break;
             }
         } else if(choice == 's' || choice == 'S') {
@@ -73,13 +95,16 @@ void play_round() {
 
         if(dealer_hand.value > 21){
             printf("Dealer Busts! You win!\n");
+            result = 1;
         } else {
             if(player_hand.value > dealer_hand.value){
                 print_hand("Player", &player_hand);
                 printf("You Win!\n");
+                result = 1;
             } else if(player_hand.value < dealer_hand.value){
                 print_hand("Player", &player_hand);
                 printf("Dealer Wins!\n");
+                result = -1;
             } else {
                 print_hand("Player", &player_hand);
                 printf("Push.\n");
@@ -89,9 +114,10 @@ void play_round() {
     free_hand(&player_hand);
     free_hand(&dealer_hand);
     free_deck(&deck);
+    return result;
 }
 
-/* void log(const char *result, int bet, int net_change){
+/* void log(char result){
     //handle write out of w/l
     FILE *log = fopen("session-log.txt", "a");
     fclose(log);
