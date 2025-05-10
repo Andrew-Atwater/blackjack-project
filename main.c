@@ -6,21 +6,9 @@
 #include "blackjack.h"
 
 int main(){
-    Deck deck;
-    Hand player_hand;
 
     srand(time(NULL));
-
-    init_deck(&deck);
-    init_hand(&player_hand);
-
-    deal_card(&player_hand, draw(&deck));
-    deal_card(&player_hand, draw(&deck));
-
-    print_hand("Player", &player_hand);
-
-    free_hand(&player_hand);
-    free_deck(&deck);
+    play_game();
     
     return 0;
 }

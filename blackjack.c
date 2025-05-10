@@ -7,7 +7,7 @@
 
 void play_game() {
     int playing = 1;
-    while playing(){
+    while(playing == 1){
         play_round();
         char choice;
         printf("Play another round? (y/n): \n");
@@ -78,7 +78,7 @@ void play_round() {
                 } else if(player_hand.value < dealer_hand.value){
                     print_hand("Player", &player_hand);
                     print_hand("Dealer", &dealer_hand);
-                    printf("Dealer Wins!\n")
+                    printf("Dealer Wins!\n");
                 } else {
                     print_hand("Player", &player_hand);
                     print_hand("Dealer", &dealer_hand);
@@ -87,6 +87,9 @@ void play_round() {
             }
         }
     }
+    free_hand(&player_hand);
+    free_hand(&dealer_hand);
+    free_deck(&deck);
 }
 
 /* void log(const char *result, int bet, int net_change){
