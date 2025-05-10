@@ -42,7 +42,7 @@ void update_value(Hand *hand){
     }
     
     for(int i = 0; i < hand->num_cards && hand->value > 21; i++){
-        if(hand->cards[i] = 11){
+        if(hand->cards[i] == 11){
             hand->cards[i] = 1;
             hand->value -= 10;
         }
@@ -53,7 +53,7 @@ void update_value(Hand *hand){
 void deal_card(Hand *hand, int card_value){
     if(hand->num_cards >= hand->capacity){
         int new_cap = hand->capacity * 2;
-        int *temp = realloc(hand->cards, sizeof(int) * new_cap);
+        int *temp = realloc(hand->cards, sizeof(int) * new_cap); //allocating more memory to hand space for more cards
 
         hand->cards = temp;
         hand->capacity = new_cap;

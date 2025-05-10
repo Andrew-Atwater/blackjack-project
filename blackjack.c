@@ -6,14 +6,11 @@
 #include "deck.h"
 
 void play_game() {
-    while(1){
+    char choice = 'y';
+    while(choice == 'y' || choice == 'Y'){
         play_round();
-        char choice;
-        printf("Play another round? (y/n): \n");
-        scanf("%c", &choice);
-        if(choice != 'y' && choice != 'Y'){
-            break;
-        }
+        printf("Play another round? (y/n): ");
+        scanf(" %c", &choice);
     }
 }
 
@@ -63,29 +60,29 @@ void play_round() {
         } else {
             printf("Invalid choice. Please enter either 'h' or 's'.\n");
         }
+    }
 
         //Dealer's turn
 
-        if(player_hand.value <= 21){
+    if(player_hand.value <= 21){
+        print_hand("Dealer", &dealer_hand);
+        while(dealer_hand.value < 17){
+            deal_card(&dealer_hand, draw(&deck));
             print_hand("Dealer", &dealer_hand);
-            while(dealer_hand.value < 17){
-                deal_card(&dealer_hand, draw(&deck));
-                print_hand("Dealer", &dealer_hand);
-            }
+        }
 
-            if(dealer_hand.value > 21){
-                printf("Dealer Busts! You win!\n");
+        if(dealer_hand.value > 21){
+            printf("Dealer Busts! You win!\n");
+        } else {
+            if(player_hand.value > dealer_hand.value){
+                print_hand("Player", &player_hand);
+                printf("You Win!\n");
+            } else if(player_hand.value < dealer_hand.value){
+                print_hand("Player", &player_hand);
+                printf("Dealer Wins!\n");
             } else {
-                if(player_hand.value > dealer_hand.value){
-                    print_hand("Player", &player_hand);
-                    printf("You Win!\n");
-                } else if(player_hand.value < dealer_hand.value){
-                    print_hand("Player", &player_hand);
-                    printf("Dealer Wins!\n");
-                } else {
-                    print_hand("Player", &player_hand);
-                    printf("Push.\n");
-                }
+                print_hand("Player", &player_hand);
+                printf("Push.\n");
             }
         }
     }
