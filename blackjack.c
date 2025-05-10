@@ -6,14 +6,13 @@
 #include "deck.h"
 
 void play_game() {
-    int playing = 1;
-    while(playing == 1){
+    while(1){
         play_round();
         char choice;
         printf("Play another round? (y/n): \n");
         scanf("%c", &choice);
         if(choice != 'y' && choice != 'Y'){
-            playing = 0;
+            break;
         }
     }
 }
@@ -35,6 +34,9 @@ void play_round() {
     if(dealer_hand.value == 21){
         print_hand("Dealer", &dealer_hand);
         printf("Dealer has blackjack! Dealer wins\n");
+        free_hand(&dealer_hand);
+        free_hand(&player_hand);
+        free_deck(&deck);
         return;
     } else {
         printf("Dealer's Hand: [%d] [??]\n", dealer_hand.cards[0]);
@@ -44,44 +46,44 @@ void play_round() {
     char choice;
     while(1){
         printf("Hit or stand? (h/s): ");
-        scanf("%c", &choice);
-        //hit logic
-        if(choice == 'h'){
+        scanf(" %c", &choice);
+
+        //hit/stand logic
+
+        if(choice == 'h' || choice == 'H'){
             deal_card(&player_hand, draw(&deck));
             print_hand("Player", &player_hand);
+
             if(player_hand.value > 21){
                 printf("Player busts!\n");
-                printf("Dealer's hand was: ");
-                print_hand("Dealer", &dealer_hand);
-                printf("\n");
                 break;
-            } else if(choice == 's') {
-                break;
-            } else {
-                printf("Invalid choice.\n");
             }
+        } else if(choice == 's' || choice == 'S') {
+            break;
+        } else {
+            printf("Invalid choice. Please enter either 'h' or 's'.\n");
         }
+
+        //Dealer's turn
+
         if(player_hand.value <= 21){
             print_hand("Dealer", &dealer_hand);
             while(dealer_hand.value < 17){
                 deal_card(&dealer_hand, draw(&deck));
                 print_hand("Dealer", &dealer_hand);
             }
+
             if(dealer_hand.value > 21){
-                print_hand("Dealer", &dealer_hand);
                 printf("Dealer Busts! You win!\n");
             } else {
                 if(player_hand.value > dealer_hand.value){
                     print_hand("Player", &player_hand);
-                    print_hand("Dealer", &dealer_hand);
                     printf("You Win!\n");
                 } else if(player_hand.value < dealer_hand.value){
                     print_hand("Player", &player_hand);
-                    print_hand("Dealer", &dealer_hand);
                     printf("Dealer Wins!\n");
                 } else {
                     print_hand("Player", &player_hand);
-                    print_hand("Dealer", &dealer_hand);
                     printf("Push.\n");
                 }
             }
