@@ -7,6 +7,6 @@
 void play_game();
 int play_round();
 
-//void log(char result);
+void log(int round, char *result, int bet, int bal);
 
 #endif
