@@ -10,7 +10,7 @@ void play_game() {
     int bal = 100;
     int bet;
     int round = 1;
-    char *result = "Push";
+    char *result_str = "Push";
     while((choice == 'y' || choice == 'Y') && bal > 0){
         printf("What would you like your bet to be for this round? Balance: %d\n", bal);
         scanf(" %d", &bet);
@@ -20,15 +20,15 @@ void play_game() {
             int result = play_round();
             if(result == 1){
                 bal += bet;
-                result = "Win";
+                result_str = "Win";
             } else if(result == -1){
                 bal -= bet;
-                result = "Loss";
+                result_str = "Loss";
             } else if (result == 2){
                 bal *= (int)(1.5 * bet);
-                result = "Blackjack"
+                result_str = "Blackjack";
             }
-            log(round, result, bet, bal);
+            log_round(round, result_str, bet, bal);
             round++;
             if (bal == 0){
                 printf("Account empty! Game over. Thanks for playing!\n");
@@ -137,8 +137,8 @@ int play_round() {
         return result;
 }
 
-void log(int round, char *result, int bet, int bal){
+void log_round(int round, char *result_str, int bet, int bal){
     FILE *log = fopen("session-log.txt", "a");
-    fprintf(log, "Round: %d")
+    fprintf(log, "Round: %d | %s | Bet: %d | Balance: %d\n", round, result_str, bet, bal);
     fclose(log);
 }
